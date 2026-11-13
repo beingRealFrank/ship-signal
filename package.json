@@ -1,0 +1,27 @@
+{
+  "name": "ship-signal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "node --experimental-strip-types --no-warnings --test src/core/*.test.ts",
+    "lint": "eslint src/**/*",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@forge/api": "^8.5.0",
+    "@forge/bridge": "7.3.0-next.12",
+    "@forge/react": "12.5.0-next.2",
+    "@forge/resolver": "^2.0.2",
+    "react": "^18.2.0"
+  },
+  "description": "Is this Jira release ready to ship? Transparent readiness scoring plus Rovo MCP tools."
+}

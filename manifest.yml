@@ -1,0 +1,80 @@
+modules:
+  jira:projectPage:
+    - key: ship-signal-project-page
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: Ship Signal
+  rovo:mcp:
+    - key: ship-signal-mcp
+      name: Ship Signal
+      tools:
+        - get-release-readiness
+        - list-release-blockers
+        - list-upcoming-releases
+  action:
+    - key: get-release-readiness
+      name: Get release readiness
+      function: getReleaseReadiness
+      actionVerb: GET
+      description: "Score whether a Jira fix version is ready to ship (0-100: Ready, At risk or Not ready) and explain each deduction: high-priority, flagged, blocked, unassigned or reopened issues, missing release notes, schedule risk."
+      inputs:
+        projectKey:
+          title: Project key
+          type: string
+          required: true
+          description: The Jira project key, for example SHIP.
+        version:
+          title: Version
+          type: string
+          required: true
+          description: The fix version name (for example 2.4.0) or its numeric id.
+    - key: list-release-blockers
+      name: List release blockers
+      function: listReleaseBlockers
+      actionVerb: GET
+      description: "List open issues blocking a Jira fix version from shipping (high priority, flagged, blocking or blocked), with assignee and reason."
+      inputs:
+        projectKey:
+          title: Project key
+          type: string
+          required: true
+          description: The Jira project key, for example SHIP.
+        version:
+          title: Version
+          type: string
+          required: true
+          description: The fix version name or numeric id.
+    - key: list-upcoming-releases
+      name: List upcoming releases
+      function: listUpcomingReleases
+      actionVerb: GET
+      description: "List unreleased fix versions in a Jira project with each one's readiness verdict, score and open issue count."
+      inputs:
+        projectKey:
+          title: Project key
+          type: string
+          required: true
+          description: The Jira project key, for example SHIP.
+  function:
+    - key: resolver
+      handler: index.handler
+    - key: getReleaseReadiness
+      handler: index.getReleaseReadiness
+    - key: listReleaseBlockers
+      handler: index.listReleaseBlockers
+    - key: listUpcomingReleases
+      handler: index.listUpcomingReleases
+resources:
+  - key: main
+    path: src/frontend/index.tsx
+permissions:
+  scopes:
+    - read:jira-work
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/a1675b47-10c8-4420-ba0c-e20207c6de82
