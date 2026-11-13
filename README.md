@@ -68,11 +68,6 @@ agent in Rovo Studio, add the *Ship Signal* tools from **Connected apps**, and p
 - `src/mcp.ts`: the Rovo MCP tool handlers
 - `src/frontend/index.tsx`: the UI Kit project page
 
-## AI disclosure
-
-The concept, code and documentation for this project were produced by Claude Code AI agents,
-which the entrant, Frank Gilroy, directed to build it for Codegeist 2026. See [AI_USE.md](AI_USE.md).
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
